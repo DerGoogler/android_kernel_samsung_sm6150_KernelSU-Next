@@ -55,8 +55,9 @@ jobs:
       - name: Build Kernel With KSU
         run: |
           export KERNEL_DIR="$(pwd)"
-          source ./build_kernel.sh ${{ matrix.target }}
-          cp $KERNEL_DIR/../AnyKernel3* $KERNEL_DIR/../files
+          # source ./build_kernel.sh ${{ matrix.target }}
+          ls $KERNEL_DIR
+          cp $KERNEL_DIR/../AnyKernel3/master* $KERNEL_DIR/../files
 
       - name: Publish to GitHub
         id: release
