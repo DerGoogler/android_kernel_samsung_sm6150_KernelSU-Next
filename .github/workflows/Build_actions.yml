@@ -50,7 +50,7 @@ jobs:
 
       - name: Setup KSU
         run: |
-          curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/refs/heads/next/kernel/setup.sh" | bash -
+          curl -LSs "https://raw.githubusercontent.com/DerGoogler/KernelSU-Next/refs/heads/next/kernel/setup.sh" | bash -
 
       - name: Build Kernel With KSU
         run: |
