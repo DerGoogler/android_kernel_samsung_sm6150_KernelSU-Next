@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [a70q]
+        target: [a70q, a70s]
 
     steps:
       - name: Checkout repo
