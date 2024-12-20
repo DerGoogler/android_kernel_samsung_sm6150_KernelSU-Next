@@ -56,7 +56,7 @@ jobs:
         run: |
           export KERNEL_DIR="$(pwd)"
           source ./build_kernel.sh ${{ matrix.target }}
-          cp $KERNEL_DIR/../AnyKernel3/master* $KERNEL_DIR/../files
+          cp $KERNEL_DIR/../AnyKernel3* $KERNEL_DIR/../files
 
       - name: Publish to GitHub
         id: release
