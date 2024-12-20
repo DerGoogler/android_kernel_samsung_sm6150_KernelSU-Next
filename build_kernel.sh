@@ -12,11 +12,11 @@ MAKE_PARAMS="-j$JOBS ARCH=arm64 O=out LLVM=1 CC=clang CLANG_TRIPLE=aarch64-linux
 devicecheck() {
     if [ "$DEVICE_MODEL" == "a70q" ]; then
         DEVICE_NAME="a70q"
-        ZIP_NAME=""$DEVICE_NAME"_KSU_"$(date +%d%m%y)""
+        ZIP_NAME=""$DEVICE_NAME"_KSU-Next_"$(date +%d%m%y)""
         DEFCONFIG=a70q_defconfig
     elif [ "$DEVICE_MODEL" == "a70s" ]; then
         DEVICE_NAME="a70s"
-        ZIP_NAME=""$DEVICE_NAME"_KSU_"$(date +%d%m%y)""
+        ZIP_NAME=""$DEVICE_NAME"_KSU-Next_"$(date +%d%m%y)""
         DEFCONFIG=a70q_defconfig
     else
         echo "- Config not found"
@@ -44,7 +44,7 @@ anykernel3() {
 		git reset HEAD --hard
 		cd $DIR
 	else 
-	    git clone --branch a70 https://github.com/Vaz15k/AnyKernel3.git $PARENT_DIR/AnyKernel3
+	    git clone --branch a70 https://github.com/DerGoogler/AnyKernel3-A70-KSU_Next.git $PARENT_DIR/AnyKernel3
 	    cd $DIR
 	fi
 }

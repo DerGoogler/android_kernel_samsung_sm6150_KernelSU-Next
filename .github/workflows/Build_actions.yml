@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [a70q, a70s]
+        target: [a70q]
 
     steps:
       - name: Checkout repo
@@ -45,25 +45,25 @@ jobs:
       - name: Fetch AnyKernel3
         run: |
           export KERNEL_DIR="$(pwd)"
-          git clone --branch a70 https://github.com/Vaz15k/AnyKernel3.git $KERNEL_DIR/../AnyKernel3
+          git clone --branch master https://github.com/DerGoogler/AnyKernel3-A70-KSU_Next.git $KERNEL_DIR/../AnyKernel3
           mkdir $KERNEL_DIR/../files
 
       - name: Setup KSU
         run: |
-          curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
+          curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/refs/heads/next/kernel/setup.sh" | bash -
 
       - name: Build Kernel With KSU
         run: |
           export KERNEL_DIR="$(pwd)"
           source ./build_kernel.sh ${{ matrix.target }}
-          cp $KERNEL_DIR/../AnyKernel3/a70* $KERNEL_DIR/../files
+          cp $KERNEL_DIR/../AnyKernel3/master* $KERNEL_DIR/../files
 
       - name: Publish to GitHub
         id: release
         uses: softprops/action-gh-release@v2
         with:
-          files: /home/runner/work/android_kernel_samsung_sm6150_KernelSU/files/a70*
-          name: KernelSU for A70
+          files: /home/runner/work/android_kernel_samsung_sm6150_KernelSU-Next/files/a70*
+          name: KernelSU Next for A70
           tag_name: ${{ github.run_number }}
           body: |
             **Release Notes - Kernel**
