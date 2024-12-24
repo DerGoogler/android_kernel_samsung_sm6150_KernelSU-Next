@@ -65,10 +65,15 @@ jobs:
           export SUS="$KERNEL_DIR/../susfs4ksu"
 
           echo $KERNEL_DIR
+          ls $KERNEL_DIR
           echo $KERNEL_DIR/../files
+          ls $KERNEL_DIR/../files
           echo $KERNEL_ROOT
+          ls $KERNEL_ROOT
           echo $KERNEL_ROOT/kernelsu
+          ls $KERNEL_ROOT/kernelsu
           echo $SUS
+          ls $SUS
 
           
 
