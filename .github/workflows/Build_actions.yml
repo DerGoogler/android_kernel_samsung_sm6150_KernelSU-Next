@@ -64,13 +64,15 @@ jobs:
           export KERNEL_ROOT="$KERNEL_DIR/drivers"
           export SUS="$KERNEL_DIR/../susfs4ksu"
 
-          cp $SUS/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_DIR
           cp $SUS/kernel_patches/50_add_susfs_in_kernel-4.14.patch $KERNEL_DIR/
-          cp $SUS/kernel_patches/fs/susfs.c $KERNEL_DIR/fs/
           cp $SUS/kernel_patches/include/linux/susfs.h $KERNEL_DIR/fs
-
+          cp $SUS/kernel_patches/fs/susfs.c $KERNEL_DIR/fs/
+          
+          cp $SUS/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_ROOT/kernelsu
+          
+          cd $KERNEL_ROOT/kernelsu
+          
           patch -p1 < 10_enable_susfs_for_ksu.patch
-
 
       - name: Build Kernel With KSU
         run: |
