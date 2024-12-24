@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - 'ksu-man'
-      - 'ksu-susfs-man'
 
 jobs:
   build_kernel:
