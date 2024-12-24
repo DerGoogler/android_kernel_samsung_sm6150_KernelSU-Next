@@ -52,7 +52,7 @@ jobs:
       - name: Fetch SUSFS for KernelSU
         run: |
           export KERNEL_DIR="$(pwd)"
-          git clone --branch master https://gitlab.com/simonpunk/susfs4ksu.git $KERNEL_DIR/../susfs4ksu
+          git clone --branch kernel-4.14 https://gitlab.com/simonpunk/susfs4ksu.git $KERNEL_DIR/../susfs4ksu
 
       - name: Setup KSU
         run: |
@@ -63,28 +63,15 @@ jobs:
           export KERNEL_DIR="$(pwd)"
           export KERNEL_ROOT="$KERNEL_DIR/drivers"
           export SUS="$KERNEL_DIR/../susfs4ksu"
-
-          echo $KERNEL_DIR
-          ls $KERNEL_DIR
-          echo $KERNEL_DIR/../files
-          ls $KERNEL_DIR/../files
-          echo $KERNEL_ROOT
-          ls $KERNEL_ROOT
-          echo $KERNEL_ROOT/kernelsu
-          ls $KERNEL_ROOT/kernelsu
-          echo $SUS
-          ls $SUS
-
           
+          cp $SUS/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_DIR/KernelSU-Next/
 
           cp $SUS/kernel_patches/50_add_susfs_in_kernel-4.14.patch $KERNEL_DIR/
-          cp $SUS/kernel_patches/include/linux/susfs.h $KERNEL_DIR/fs/
           cp $SUS/kernel_patches/fs/susfs.c $KERNEL_DIR/fs/
-          
-          cp $SUS/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_ROOT/kernelsu
-          
-          cd $KERNEL_ROOT/kernelsu
-          
+          cp $SUS/kernel_patches/include/linux/susfs.h $KERNEL_DIR/include/linux/
+
+          cd $KERNEL_ROOT/KernelSU-Next
+
           patch -p1 < 10_enable_susfs_for_ksu.patch
 
       - name: Build Kernel With KSU
