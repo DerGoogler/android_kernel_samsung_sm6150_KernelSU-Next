@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - 'ksu-man'
+      - 'ksu-susfs-man'
 
 jobs:
   build_kernel:
@@ -39,7 +40,7 @@ jobs:
           git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9 $KERNEL_DIR/../Prebuilts/gcc32
           git clone https://android.googlesource.com/platform/prebuilts/gas/linux-x86 $KERNEL_DIR/../Prebuilts/gas/linux-x86
           git clone --depth=1 https://android.googlesource.com/platform/prebuilts/build-tools $KERNEL_DIR/../Prebuilts/build-tools
-          
+
           cd "$KERNEL_DIR"
 
       - name: Fetch AnyKernel3
@@ -48,9 +49,27 @@ jobs:
           git clone --branch master https://github.com/DerGoogler/AnyKernel3-A70-KSU_Next.git $KERNEL_DIR/../AnyKernel3
           mkdir $KERNEL_DIR/../files
 
+      - name: Fetch SUSFS for KernelSU
+        run: |
+          export KERNEL_DIR="$(pwd)"
+          git clone --branch master https://gitlab.com/simonpunk/susfs4ksu.git $KERNEL_DIR/../susfs4ksu
+          mkdir $KERNEL_DIR/../susfs4ksu
+
       - name: Setup KSU
         run: |
           curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/refs/heads/next/kernel/setup.sh" | bash -
+
+      - name: Setup SUSFS
+        run: |
+          export KERNEL_ROOT="$(pwd)/drivers"
+
+          cp ./kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_ROOT/kernelsu/
+          cp ./kernel_patches/50_add_susfs_in_kernel-4.14.patch $KERNEL_ROOT/
+          cp ./kernel_patches/fs/susfs.c $KERNEL_ROOT/fs/
+          cp ./kernel_patches/include/linux/susfs.h $KERNEL_ROOT/include/linux/
+          cd $KERNEL_ROOT/KernelSU
+          patch -p1 < 10_enable_susfs_for_ksu.patch
+
 
       - name: Build Kernel With KSU
         run: |
