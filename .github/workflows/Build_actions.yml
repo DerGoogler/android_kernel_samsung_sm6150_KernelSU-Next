@@ -53,7 +53,6 @@ jobs:
         run: |
           export KERNEL_DIR="$(pwd)"
           git clone --branch master https://gitlab.com/simonpunk/susfs4ksu.git $KERNEL_DIR/../susfs4ksu
-          mkdir $KERNEL_DIR/../susfs4ksu
 
       - name: Setup KSU
         run: |
