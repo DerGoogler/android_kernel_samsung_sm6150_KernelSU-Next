@@ -61,7 +61,6 @@ jobs:
       - name: Setup SUSFS
         run: |
           export KERNEL_DIR="$(pwd)"
-          export KERNEL_ROOT="$KERNEL_DIR/drivers"
           export SUS="$KERNEL_DIR/../susfs4ksu"
           
           cp $SUS/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_DIR/KernelSU-Next/
@@ -70,7 +69,7 @@ jobs:
           cp $SUS/kernel_patches/fs/susfs.c $KERNEL_DIR/fs/
           cp $SUS/kernel_patches/include/linux/susfs.h $KERNEL_DIR/include/linux/
 
-          cd $KERNEL_ROOT/KernelSU-Next
+          cd $KERNEL_DIR/KernelSU-Next
 
           patch -p1 < 10_enable_susfs_for_ksu.patch
 
