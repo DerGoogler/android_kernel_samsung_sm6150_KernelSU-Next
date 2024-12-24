@@ -71,7 +71,7 @@ jobs:
 
           cd $KERNEL_DIR/KernelSU-Next
 
-          patch -p1 < 10_enable_susfs_for_ksu.patch
+          git apply 10_enable_susfs_for_ksu.patch
 
       - name: Build Kernel With KSU
         run: |
