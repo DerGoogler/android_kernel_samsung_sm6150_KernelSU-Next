@@ -67,6 +67,7 @@ jobs:
           echo $KERNEL_DIR
           echo $KERNEL_DIR/../files
           echo $KERNEL_ROOT
+          echo $KERNEL_ROOT/kernelsu
           echo $SUS
 
           
