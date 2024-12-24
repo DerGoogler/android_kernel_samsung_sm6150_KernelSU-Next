@@ -39,7 +39,7 @@ jobs:
           git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9 $KERNEL_DIR/../Prebuilts/gcc32
           git clone https://android.googlesource.com/platform/prebuilts/gas/linux-x86 $KERNEL_DIR/../Prebuilts/gas/linux-x86
           git clone --depth=1 https://android.googlesource.com/platform/prebuilts/build-tools $KERNEL_DIR/../Prebuilts/build-tools
-          
+
           cd "$KERNEL_DIR"
 
       - name: Fetch AnyKernel3
@@ -50,7 +50,7 @@ jobs:
 
       - name: Setup KSU
         run: |
-          curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/refs/heads/next/kernel/setup.sh" | bash -
+          curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/refs/heads/next-susfs-4.14/kernel/setup.sh" | bash -
 
       - name: Build Kernel With KSU
         run: |
