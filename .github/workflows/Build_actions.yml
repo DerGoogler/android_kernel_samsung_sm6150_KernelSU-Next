@@ -48,31 +48,9 @@ jobs:
           git clone --branch master https://github.com/DerGoogler/AnyKernel3-A70-KSU_Next.git $KERNEL_DIR/../AnyKernel3
           mkdir $KERNEL_DIR/../files
 
-      - name: Fetch SUSFS for KernelSU
-        run: |
-          export KERNEL_DIR="$(pwd)"
-          git clone --branch kernel-4.14 https://gitlab.com/simonpunk/susfs4ksu.git $KERNEL_DIR/../susfs4ksu
-
       - name: Setup KSU
         run: |
-          curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/refs/heads/next-susfs-4.14/kernel/setup.sh" | bash -
-
-      - name: Setup SUSFS
-        run: |
-          export KERNEL_DIR="$(pwd)"
-          export SUS="$KERNEL_DIR/../susfs4ksu"
-          
-          # Not needed because it's already included in KernelSU Next branch - kernel-4.14
-          # cp $SUS/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_DIR/KernelSU-Next/
-  
-          cp $SUS/kernel_patches/50_add_susfs_in_kernel-4.14.patch $KERNEL_DIR/
-          cp $SUS/kernel_patches/fs/susfs.c $KERNEL_DIR/fs/
-          cp $SUS/kernel_patches/include/linux/susfs.h $KERNEL_DIR/include/linux/
-  
-          # cd $KERNEL_DIR/KernelSU-Next
-          # patch -p1 < 10_enable_susfs_for_ksu.patch
-          
-          patch -p1 < 50_add_susfs_in_kernel-4.14.patch
+          curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next-susfs/kernel/setup.sh" | bash -s next-susfs
 
       - name: Build Kernel With KSU
         run: |
