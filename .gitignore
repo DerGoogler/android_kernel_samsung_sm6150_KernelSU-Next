@@ -129,3 +129,6 @@ kernel/configs/android-*.cfg
 #Ignoring Android.bp link file
 #
 Android.bp
+
+!50_add_susfs_in_kernel-4.14.patch
+!10_enable_susfs_for_ksu.patch
