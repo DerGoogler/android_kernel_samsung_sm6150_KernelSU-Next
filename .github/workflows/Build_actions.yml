@@ -63,15 +63,15 @@ jobs:
           export KERNEL_DIR="$(pwd)"
           export SUS="$KERNEL_DIR/../susfs4ksu"
           
-          cp $KERNERL_DIR/10_enable_susfs_for_ksu.patch $KERNEL_DIR/KernelSU-Next/
+          # cp $KERNERL_DIR/10_enable_susfs_for_ksu.patch $KERNEL_DIR/KernelSU-Next/
   
           cp -r $SUS/kernel_patches/fs/* $KERNEL_DIR/fs/
           cp -r $SUS/kernel_patches/include/linux/* $KERNEL_DIR/include/linux
   
-          cd $KERNEL_DIR/KernelSU-Next
-          patch -p1 < 10_enable_susfs_for_ksu.patch || true
-          cd $KERNEL_DIR
-          # patch -p1 < 50_add_susfs_in_kernel-4.14.patch || true
+          # cd $KERNEL_DIR/KernelSU-Next
+          # patch -p1 < 10_enable_susfs_for_ksu.patch || true
+          # cd $KERNEL_DIR
+          patch -p1 < 50_add_susfs_in_kernel-4.14.patch || true
 
       - name: Build Kernel With KSU
         run: |
