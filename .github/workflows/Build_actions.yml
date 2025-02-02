@@ -47,7 +47,7 @@ jobs:
           export KERNEL_DIR="$(pwd)"
           git clone --branch master https://github.com/DerGoogler/AnyKernel3-A70-KSU_Next.git $KERNEL_DIR/../AnyKernel3
           mkdir $KERNEL_DIR/../files
-          
+
       - name: Fetch SUSFS for KernelSU
         run: |
           export KERNEL_DIR="$(pwd)"
@@ -66,8 +66,8 @@ jobs:
           # cp $SUS/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_DIR/KernelSU-Next/
   
           cp $SUS/kernel_patches/50_add_susfs_in_kernel-4.14.patch $KERNEL_DIR/
-          cp $SUS/kernel_patches/fs/susfs.c $KERNEL_DIR/fs/
-          cp $SUS/kernel_patches/include/linux/susfs.h $KERNEL_DIR/include/linux/
+          cp $SUS/kernel_patches/fs/* $KERNEL_DIR/fs/
+          cp $SUS/kernel_patches/include/* $KERNEL_DIR/include/linux
   
           # cd $KERNEL_DIR/KernelSU-Next
           # patch -p1 < 10_enable_susfs_for_ksu.patch
