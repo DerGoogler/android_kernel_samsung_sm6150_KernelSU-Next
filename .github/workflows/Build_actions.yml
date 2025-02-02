@@ -62,14 +62,13 @@ jobs:
           export KERNEL_DIR="$(pwd)"
           export SUS="$KERNEL_DIR/../susfs4ksu"
           
-          # Not needed because it's already included in KernelSU Next branch - kernel-4.14
-          # cp $SUS/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_DIR/KernelSU-Next/
+          cp $SUS/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_DIR/KernelSU-Next/
   
           cp $SUS/kernel_patches/50_add_susfs_in_kernel-4.14.patch $KERNEL_DIR/
           cp -r $SUS/kernel_patches/fs/* $KERNEL_DIR/fs/
           cp -r $SUS/kernel_patches/include/* $KERNEL_DIR/include/linux
   
-          cd $KERNEL_DIR/drivers/KernelSU-Next
+          cd $KERNEL_DIR/KernelSU-Next
           patch -p1 < 10_enable_susfs_for_ksu.patch
           cd $KERNEL_DIR
           patch -p1 < 50_add_susfs_in_kernel-4.14.patch
