@@ -59,6 +59,7 @@ jobs:
 
       - name: Setup SUSFS
         run: |
+          set +e
           export KERNEL_DIR="$(pwd)"
           export SUS="$KERNEL_DIR/../susfs4ksu"
           
