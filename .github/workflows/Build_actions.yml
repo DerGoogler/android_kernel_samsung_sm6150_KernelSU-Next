@@ -69,9 +69,9 @@ jobs:
           cp $SUS/kernel_patches/fs/* $KERNEL_DIR/fs/
           cp $SUS/kernel_patches/include/* $KERNEL_DIR/include/linux
   
-          # cd $KERNEL_DIR/KernelSU-Next
-          # patch -p1 < 10_enable_susfs_for_ksu.patch
-          
+          cd $KERNEL_DIR/drivers/KernelSU-Next
+          patch -p1 < 10_enable_susfs_for_ksu.patch
+          cd $KERNEL_DIR
           patch -p1 < 50_add_susfs_in_kernel-4.14.patch
 
       - name: Build Kernel With KSU
