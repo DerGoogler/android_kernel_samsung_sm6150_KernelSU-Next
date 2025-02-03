@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [a70q] #, a70s]
+        target: [a70q, a70s]
 
     steps:
       - name: Checkout repo
@@ -75,6 +75,8 @@ jobs:
           body: |
             **Release Notes - Kernel**
 
+            - **SUSSY Download:** https://mmrl.dev/repository/gmr/susfs4ksu
+            - **SUS Auto Mode:** Disabled
             - **Kernel Version:** 4.14.190
             - **Clang Version:** Clang-r416183b
 
