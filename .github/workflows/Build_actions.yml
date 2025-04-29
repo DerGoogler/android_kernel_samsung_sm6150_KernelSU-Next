@@ -69,7 +69,7 @@ jobs:
         id: release
         uses: softprops/action-gh-release@v2
         with:
-          files: /home/runner/work/android_kernel_samsung_sm6150_KernelSU-Next/files/a70*
+          files: ../files/a70*
           name: KernelSU Next for A70
           tag_name: ${{ github.run_number }}
           body: |
