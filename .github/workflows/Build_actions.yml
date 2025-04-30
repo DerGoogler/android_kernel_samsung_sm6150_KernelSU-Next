@@ -10,6 +10,7 @@ on:
 jobs:
   build_kernel:
     runs-on: ubuntu-latest
+    # Maybe should change to ubuntu-24.04
 
     strategy:
       fail-fast: false
@@ -70,7 +71,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: ../files/a70*
-          name: KernelSU Next for A70
+          name: KernelSU Next for A70 with FM Radio Drivers
           tag_name: ${{ github.run_number }}
           body: |
             **Release Notes - Kernel**
