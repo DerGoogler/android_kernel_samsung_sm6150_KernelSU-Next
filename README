@@ -9,7 +9,8 @@ What we want is to make the [LineageOS radio app work](https://www.apkmirror.com
 Info from main developers on radio support:
 > at this point I've neglected [radio] so much that I don't remember if los even ships the hal
 and
-> The problem is probably due to OSS radio library from LineageOS because no fucking reason for our HAL not to work
+> [we] should be looking at qcom's fm and bluetooth hals
+> the fm library is prebuilt, not OSS, [the problem is with out hal]
 
 As adding these options didn't solve the problem, it's likely not (just?) a kernel issue, so I'm archiving this
 
