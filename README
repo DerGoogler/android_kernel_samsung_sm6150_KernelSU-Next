@@ -1,3 +1,18 @@
+Update: This doesn't work, it's probably not a kenel issue. The radio was working on lineageOS19, and it stopped working on more recent versions.
+The [real FM radio app](https://github.com/vladislav805/RFM-Radio) is made for older versions of android, it won't even run on android 14 and 15, I updated the sdk, but it doesn't work anyways.
+What we want is to make the [LineageOS radio app work](https://www.apkmirror.com/apk/lineageos/fm-radio-10/fm-radio-10-13-release/fm-radio-13-android-apk-download/) Right now trying to install that app on android 14 gives me:
+```
+05-01 17:10:57.860 W PackageManager: com.android.server.pm.ReconcileFailure: Reconcile failed: Package com.caf.fmradio requires unavailable shared library qcom.fmradio; failing!
+...
+05-01 17:10:57.875 D PackageInstallerSession: Marking session 562478839 as failed: INSTALL_FAILED_MISSING_SHARED_LIBRARY: Reconciliation failed...: Reconcile failed: Package com.caf.fmradio requires unavailable shared library qcom.fmradio; failing!
+```
+Info from main developers on radio support:
+> at this point I've neglected [radio] so much that I don't remember if los even ships the hal
+and
+> The problem is probably due to OSS radio library from LineageOS because no fucking reason for our HAL not to work
+
+As adding these options didn't solve the problem, it's likely not (just?) a kernel issue, so I'm archiving this
+
 Linux kernel
 ============
 
