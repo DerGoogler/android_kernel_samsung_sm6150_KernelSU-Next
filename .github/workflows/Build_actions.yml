@@ -47,10 +47,16 @@ jobs:
           export KERNEL_DIR="$(pwd)"
           git clone --branch master https://github.com/DerGoogler/AnyKernel3-A70-KSU_Next.git $KERNEL_DIR/../AnyKernel3
           mkdir $KERNEL_DIR/../files
-
+          
       - name: Setup KSU
         run: |
-          curl -LSs "https://raw.githubusercontent.com/MMRLApp/Kernel/refs/heads/main/kernel/setup.sh?token=${{ secrets.GITHUB_TOKEN }}" | bash
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               -H "Accept: application/vnd.github.v3.raw" \
+               -L \
+               https://api.github.com/repos/MMRLApp/Kernel/contents/kernel/setup.sh \
+               -o setup.sh
+          chmod +x setup.sh
+          ./setup.sh
 
       - name: Build Kernel With KSU
         run: |
