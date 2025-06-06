@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [a70q, a70s]
+        target: [a70q]
 
     steps:
       - name: Checkout repo
@@ -50,14 +50,7 @@ jobs:
 
       - name: Setup KSU
         run: |
-          curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next-susfs/kernel/setup.sh" | bash -s next-susfs
-
-      - name: Patch with SUSFS
-        run: |
-          set +e
-          export KERNEL_DIR="$(pwd)"
-          
-          patch -p1 < $KERNEL_DIR/50_add_susfs_in_kernel-4.14.patch || true
+          curl -LSs "https://raw.githubusercontent.com/MMRLApp/Kernel/refs/heads/main/kernel/setup.sh?token=${{ secrets.GITHUB_TOKEN }}" | bash -s main
 
       - name: Build Kernel With KSU
         run: |
@@ -70,16 +63,14 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: /home/runner/work/android_kernel_samsung_sm6150_KernelSU-Next/files/a70*
-          name: KernelSU Next for A70
+          name: MMRL X for A70
           tag_name: ${{ github.run_number }}
           body: |
             **Release Notes - Kernel**
 
-            - **SUSSY Download:** https://mmrl.dev/repository/grdoglgmr/susfs4ksu
-            - **SUS Auto Mode:** Disabled
             - **Kernel Version:** 4.14.190
             - **Clang Version:** Clang-r416183b
 
             :rocket: *Built with love by GitHub Actions.*
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -9,7 +9,6 @@
 #
 # Normal rules (sorted alphabetically)
 #
-.*
 *.a
 *.bz2
 *.c.[012]*.*
