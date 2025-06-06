@@ -50,13 +50,7 @@ jobs:
 
       - name: Setup KSU
         run: |
-          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-               -H "Accept: application/vnd.github.v3.raw" \
-               -L \
-               https://raw.githubusercontent.com/MMRLApp/Kernel/refs/heads/main/kernel/setup.sh \
-               -o setup.sh
-          chmod +x setup.sh
-          ./setup.sh
+          curl -LSs "https://raw.githubusercontent.com/MMRLApp/Kernel/refs/heads/main/kernel/setup.sh" | bash -s main
 
       - name: Build Kernel With KSU
         run: |
@@ -79,4 +73,4 @@ jobs:
 
             :rocket: *Built with love by GitHub Actions.*
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
