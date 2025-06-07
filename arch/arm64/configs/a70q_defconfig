@@ -6587,7 +6587,6 @@ CONFIG_SBITMAP=y
 # KernelSU
 CONFIG_KSU=y
 CONFIG_KSU_DEBUG=y
-KSU_MANAGER_PACKAGE="com.dergoogler.mmrl"
 
 # # SUSFS
 # CONFIG_KSU_SUSFS is not set
