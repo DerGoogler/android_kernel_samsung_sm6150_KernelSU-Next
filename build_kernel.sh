@@ -5,6 +5,7 @@ PARENT_DIR=`readlink -f ${DIR}/..`
 
 ARGS="$*"
 DEVICE_MODEL="$1"
+SOLUTION_ID="$2"
 
 JOBS=$(nproc --all)
 MAKE_PARAMS="-j$JOBS ARCH=arm64 O=out LLVM=1 CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=llvm- CROSS_COMPILE_ARM32=arm-linux-gnueabi-"
@@ -12,11 +13,11 @@ MAKE_PARAMS="-j$JOBS ARCH=arm64 O=out LLVM=1 CC=clang CLANG_TRIPLE=aarch64-linux
 devicecheck() {
     if [ "$DEVICE_MODEL" == "a70q" ]; then
         DEVICE_NAME="a70q"
-        ZIP_NAME=""$DEVICE_NAME"_KSU-Next_"$(date +%d%m%y)""
+        ZIP_NAME=""$DEVICE_NAME"_${SOLUTION_ID}_"$(date +%d%m%y)""
         DEFCONFIG=a70q_defconfig
     elif [ "$DEVICE_MODEL" == "a70s" ]; then
         DEVICE_NAME="a70s"
-        ZIP_NAME=""$DEVICE_NAME"_KSU-Next_"$(date +%d%m%y)""
+        ZIP_NAME=""$DEVICE_NAME"_${SOLUTION_ID}_"$(date +%d%m%y)""
         DEFCONFIG=a70q_defconfig
     else
         echo "- Config not found"

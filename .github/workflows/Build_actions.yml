@@ -15,10 +15,11 @@ jobs:
       fail-fast: false
       matrix:
         target: [a70q] # a70s
-        solution: [
-          "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/refs/heads/next/kernel/setup.sh",
-          "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/refs/heads/main/kernel/setup.sh"
-        ]
+        solution:
+          - id: KSU-Next
+            url: https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/refs/heads/next/kernel/setup.sh
+          - id: Suki-Ul
+            url: https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/refs/heads/main/kernel/setup.sh
 
     steps:
       - name: Checkout repo
@@ -54,12 +55,12 @@ jobs:
 
       - name: Setup KSU
         run: |
-          curl -LSs "${{ matrix.solution }}" | bash -s main
+          curl -LSs "${{ matrix.solution.url }}" | bash -s main
 
       - name: Build Kernel With KSU
         run: |
           export KERNEL_DIR="$(pwd)"
-          source ./build_kernel.sh ${{ matrix.target }}
+          source ./build_kernel.sh "${{ matrix.target }}" "${{ matrix.solution.id }}"
           cp -r $KERNEL_DIR/../AnyKernel3/* $KERNEL_DIR/../files
 
       - name: Publish to GitHub
