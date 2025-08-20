@@ -14,7 +14,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [a70q]
+        target: [a70q] # a70s
+        solution: [
+          "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/refs/heads/next/kernel/setup.sh",
+          "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/refs/heads/main/kernel/setup.sh"
+        ]
 
     steps:
       - name: Checkout repo
@@ -45,12 +49,12 @@ jobs:
       - name: Fetch AnyKernel3
         run: |
           export KERNEL_DIR="$(pwd)"
-          git clone --branch master https://github.com/DerGoogler/AnyKernel3-A70-KSU_Next.git $KERNEL_DIR/../AnyKernel3
+          git clone --branch master https://github.com/DerGoogler/AnyKernel3-A70-KSU_Base.git $KERNEL_DIR/../AnyKernel3
           mkdir $KERNEL_DIR/../files
 
       - name: Setup KSU
         run: |
-          curl -LSs "https://raw.githubusercontent.com/MMRLApp/Kernel/refs/heads/main/kernel/setup.sh" | bash -s main
+          curl -LSs "${{ matrix.solution }}" | bash -s main
 
       - name: Build Kernel With KSU
         run: |
@@ -63,7 +67,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: /home/runner/work/android_kernel_samsung_sm6150_KernelSU-Next/files/a70*
-          name: MMRL X for A70
+          name: KernelSU Next and SukiSU Ultra for A70
           tag_name: ${{ github.run_number }}
           body: |
             **Release Notes - Kernel**

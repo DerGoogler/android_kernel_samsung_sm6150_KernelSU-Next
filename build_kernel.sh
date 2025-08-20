@@ -44,7 +44,7 @@ anykernel3() {
 		git reset HEAD --hard
 		cd $DIR
 	else 
-	    git clone --branch a70 https://github.com/DerGoogler/AnyKernel3-A70-KSU_Next.git $PARENT_DIR/AnyKernel3
+	    git clone --branch a70 https://github.com/DerGoogler/AnyKernel3-A70-KSU_Base.git $PARENT_DIR/AnyKernel3
 	    cd $DIR
 	fi
 }
