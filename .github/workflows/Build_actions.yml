@@ -16,12 +16,14 @@ jobs:
       matrix:
         target: [a70q] # a70s
         solution:
-          - id: KSU-Next
-            url: https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/refs/heads/next/kernel/setup.sh
-          - id: Suki-Ul
-            url: https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/refs/heads/main/kernel/setup.sh
-          - id: rsukrnlsu
-            url: https://raw.githubusercontent.com/rsuntk/KernelSU/refs/heads/main/kernel/setup.sh
+          - id: MMRLK
+            url: https://raw.githubusercontent.com/MMRLApp/Kernel/refs/heads/main/kernel/setup.sh
+          #- id: KSU-Next
+          #  url: https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/refs/heads/next/kernel/setup.sh
+          #- id: Suki-Ul
+          #  url: https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/refs/heads/main/kernel/setup.sh
+          #- id: rsukrnlsu
+          #  url: https://raw.githubusercontent.com/rsuntk/KernelSU/refs/heads/main/kernel/setup.sh
 
     steps:
       - name: Checkout repo
