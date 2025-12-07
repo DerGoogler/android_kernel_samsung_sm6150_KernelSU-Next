@@ -14,16 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [a70q] # a70s
-        solution:
-          - id: MMRLK
-            url: https://raw.githubusercontent.com/MMRLApp/Kernel/refs/heads/main/kernel/setup.sh
-          #- id: KSU-Next
-          #  url: https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/refs/heads/next/kernel/setup.sh
-          #- id: Suki-Ul
-          #  url: https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/refs/heads/main/kernel/setup.sh
-          #- id: rsukrnlsu
-          #  url: https://raw.githubusercontent.com/rsuntk/KernelSU/refs/heads/main/kernel/setup.sh
+        target: [a70q, a70s]
 
     steps:
       - name: Checkout repo
@@ -59,12 +50,12 @@ jobs:
 
       - name: Setup KSU
         run: |
-          curl -LSs "${{ matrix.solution.url }}" | bash -s main
+          curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s next-susfs
 
       - name: Build Kernel With KSU
         run: |
           export KERNEL_DIR="$(pwd)"
-          source ./build_kernel.sh "${{ matrix.target }}" "${{ matrix.solution.id }}"
+          source ./build_kernel.sh ${{ matrix.target }}
           cp -r $KERNEL_DIR/../AnyKernel3/* $KERNEL_DIR/../files
 
       - name: Publish to GitHub
@@ -72,13 +63,18 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: /home/runner/work/android_kernel_samsung_sm6150_KernelSU-Next/files/a70*
-          name: KernelSU Next and SukiSU Ultra for A70
+          name: KernelSU Next for A70
           tag_name: ${{ github.run_number }}
           body: |
             **Release Notes - Kernel**
 
             - **Kernel Version:** 4.14.190
             - **Clang Version:** Clang-r416183b
+
+            **Meta Modules are required!**
+            - [OverlayFS MetaModule](https://mmrl.dev/repository/grdoglgmr/meta-overlayfs)
+            - [Magic Mount Metamodule](https://mmrl.dev/repository/grdoglgmr/meta-mm)
+            - [Magic Mount-rs](https://mmrl.dev/repository/grdoglgmr/magic_mount_rs)
 
             :rocket: *Built with love by GitHub Actions.*
         env:
